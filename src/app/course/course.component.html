@@ -1,0 +1,38 @@
+<div *ngIf="test.length>0;then courseList else noCourse"></div>
+<ng-template #courseList>Course list</ng-template>
+<ng-template #noCourse>No course</ng-template>
+
+<div [hidden]="test.length<=0">Course is present</div>
+<div [hidden]="test.length>0">Course is absent</div>
+
+<ul class="nav nav-pills">
+    <li [class.active]="viewMode=='map'"><a (click)="viewMode='map'">Map View</a></li>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <li [class.active]="viewMode=='list'"><a (click)="viewMode='list'">List View</a></li>
+</ul>
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'"> Map view content</div>
+    <div *ngSwitchCase="'list'">List view content</div>
+</div>
+<ul>
+    <button class="nav nav-pills active" (click)="AddCourse()">Add</button>
+    <li *ngFor="let course of courses ; trackBy: trackCourse">
+       {{course.id}} - {{course.name}} <button (click)="OnRemove(course)" >Remove</button>
+       <button (click)="OnChange(course)" >Change</button>
+    </li>
+</ul>
+
+<span class="glyphicon"
+[ngClass]="{
+'glyphicon-star':isActive,
+'glyphicon-star-empty':!isActive
+}
+"
+(click)="SwitchActive()"
+></span>
+
+<button [style.backgroundColor]="isActive ? 'black':'pink' " 
+[style.color]="isActive?'red':'white'">Save </button>
+<span>{{putObj.marks?.sub}}</span>
+<br/>
+<input text="" [appInputFormat]="'uppercase'"/>

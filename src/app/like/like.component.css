@@ -1,0 +1,18 @@
+.clicked
+{
+     cursor: pointer;
+    box-shadow: dodgerblue;
+    color: deeppink;
+    font-weight: 100;
+    font-style: normal;
+    font-family: sans-serif;
+}
+.notclicked
+{
+    cursor: pointer;
+    box-shadow: dodgerblue;
+    color: darkkhaki;
+    font-weight: 100;
+    font-style: normal;
+    font-family: sans-serif;
+}

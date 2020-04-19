@@ -1,0 +1,54 @@
+<form class=form #form="ngForm" (click)='submit(form)'>
+
+<div class="form-group">
+<label for="FirstName">First Name</label>
+<input required class="form-control" minlength=3 maxlength=10 pattern="banana" id="FirstName" ngModel name="FirstName" #firstName=ngModel type="text"/>
+</div>
+<div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid" >
+    <div *ngIf="firstName.touched && firstName.errors.required">FirstName is required</div>
+    <div *ngIf="firstName.errors.minlength">FirstName length should be atleast 3</div>
+    <div *ngIf="firstName.errors.maxlength">FirstName length should be less than 10</div>
+    <div *ngIf="firstName.errors.pattern">FirstName should match the pattern</div>
+</div>
+
+
+
+<!--<div ngModelGroup name="address" #address=ngModelGroup > 
+    <div class="alert alert-danger" *ngIf="address.touched && address.valid">Please enter the below address details</div>
+    <label for="Address">Please Enter the Address in below 2 lines</label><br/>
+    <label for="Address1">Address Line 1</label>
+    <input id="Address1 Address" ngModel name="Address1" #address1=ngModel class="form-control" type="text">
+    <label for="Address2">Address Line 2</label>
+    <input id="Address2 Address" ngModel name="Address2" #address2=ngModel class="form-control" type="text">
+</div>-->
+
+<div class="form-group">
+<label for="Comment">Comment</label>
+<textarea required class="form-control" id="Comment" ngModel name="Comment" #comment=ngModel></textarea>
+</div>
+<div class="alert alert-danger" *ngIf="comment.touched && comment.invalid">Please enter any comment</div>
+<div class="checkbox">
+    <label >
+        <input required ngModel name=Subscribe type="checkbox" #subscribe=ngModel>Subscribe to mailing list
+    </label>
+</div>
+<div class="alert alert-danger" *ngIf="subscribe.touched && !subscribe.valid">Please subscribe to mailing list</div>
+<div class="form-group">
+    <label for="contactList">Contact Options</label>
+        <select required ngModel name="contactList" id="contactList" class="form-control" #contactList=ngModel>
+            <option value=""></option>
+            <option *ngFor="let contact of contactDetails" [ngValue]="contact">{{contact.name}}</option>
+        </select>
+</div>
+<div class="alert alert-danger" *ngIf="contactList.touched && !contactList.valid">Please select contact option</div>
+
+<div class="radio" *ngFor="let value of contactDetails">
+    <label for="contactradio">
+        <input required ngModel name="contactradio" id="contactradio"  #contactradio=ngModel type="radio" [value]="value.id">{{value.name}}
+    </label>
+</div>
+<div class="form-group">
+<button class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+</div>
+<p>{{form.value | json}}</p>
+</form>
